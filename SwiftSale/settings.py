@@ -32,6 +32,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Web3 handler data
+PROVIDER_URL = os.getenv('HTTP_PROVIDER_URL', 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID')
+RECIPIENT_ADDRESS = os.getenv('RECIPIENT_ADDRESS', '0xRecipientAddressHere')
 
 # Application definition
 
@@ -85,6 +88,26 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+# Logging for troubleshooting issues
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }
 
 
