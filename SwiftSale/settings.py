@@ -84,11 +84,12 @@ WSGI_APPLICATION = 'SwiftSale.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+
+# Optional: Disable connection pooling in production
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default']['CONN_MAX_AGE'] = 0
 
 # Logging for troubleshooting issues
 
